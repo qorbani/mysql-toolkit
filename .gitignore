@@ -1,0 +1,32 @@
+#
+#  Mac OSX Files
+#
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+#
+#  Windows Files
+#
+Thumbs.db
+ehthumbs.db
+$RECYCLE.BIN/
+Desktop.ini
+
+#
+#  IDE/Editors
+#
+.idea/
+
+#
+#  Project Specific
+#
+*.tmp
+*.log
+tmp.*
+~$*
+!bin/
+bin/*
+!bin/.gitignore
+!bin/*.yaml
