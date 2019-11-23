@@ -14,7 +14,7 @@ var cfgFile string
 var rootCmd = &cobra.Command{
 	Use:   "mysql-toolkit",
 	Short: "MySQL Toolkit",
-	Long:  `MySQL Client Toolkit helps you to handle basic MySQL commands in bash.`,
+	Long:  `MySQL Toolkit is a light-weight CLI to help you run queries via the command line.`,
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

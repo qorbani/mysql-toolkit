@@ -2,6 +2,7 @@ package drivers
 
 import (
 	"database/sql"
+	"encoding/json"
 	"fmt"
 
 	// MySQL Driver
@@ -34,4 +35,60 @@ func NewMySQL() (*MySQL, error) {
 	return &MySQL{
 		conn: conn,
 	}, nil
+}
+
+// Query execute SELECT sql statement
+func (sql *MySQL) Query(query string) (string, error) {
+	stmt, err := sql.conn.Prepare(query)
+	if err != nil {
+		return "", err
+	}
+	defer stmt.Close()
+
+	rows, err := stmt.Query()
+	if err != nil {
+		return "", err
+	}
+	defer rows.Close()
+
+	columns, err := rows.Columns()
+	if err != nil {
+		return "", err
+	}
+
+	dataRaw := make([]map[string]interface{}, 0)
+
+	count := len(columns)
+	values := make([]interface{}, count)
+	scanArgs := make([]interface{}, count)
+	for i := range values {
+		scanArgs[i] = &values[i]
+	}
+
+	for rows.Next() {
+		err := rows.Scan(scanArgs...)
+		if err != nil {
+			return "", err
+		}
+
+		entry := make(map[string]interface{})
+		for i, col := range columns {
+			v := values[i]
+
+			b, ok := v.([]byte)
+			if ok {
+				entry[col] = string(b)
+			} else {
+				entry[col] = v
+			}
+		}
+
+		dataRaw = append(dataRaw, entry)
+	}
+
+	dataJSON, err := json.Marshal(dataRaw)
+	if err != nil {
+		return "", err
+	}
+	return string(dataJSON), nil
 }

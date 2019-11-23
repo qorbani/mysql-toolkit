@@ -1,20 +1,22 @@
 # MySQL Toolkit
 
-MySQL Client Toolkit helps you to handle basic MySQL commands in bash.
+MySQL Toolkit is a light-weight CLI to help you run queries via the command line.
 
 ## Usage
 
-`mysql-toolkit` or `mysql-toolkit --help` will show usage and a list of commands:
+`mysql-toolkit --help` will show usage and a list of commands:
 
 ```
-MySQL Client Toolkit helps you to handle basic MySQL commands in bash.
+MySQL Toolkit is a light-weight CLI to help you run queries via the command line.
 
 Usage:
   mysql-toolkit [flags]
   mysql-toolkit [command]
 
 Available Commands:
+  debug       Debug internal information
   help        Help about any command
+  query       Execute SQL Query
   version     Toolkit version detail
 
 Flags:
@@ -28,12 +30,19 @@ Flags:
 Use "mysql-toolkit [command] --help" for more information about a command.
 ```
 
+### Example
+
+```bash
+# Get list of all databases
+mysql-toolkit query "SHOW DATABASES" | jq -r ".[] | .Database"
+```
+
 ## Configuration
 
 There are many different ways to configure `mysql-toolkit` CLI:
-- Use Environemnt Variables (use `MYSQL_TOOLKIT` prefix)
+- Use Environment Variables (use `MYSQL_TOOLKIT` prefix)
 - Store Configuration in File (locate `mysql-toolkit.yaml` in `$PWD` or `$HOME`)
-- Pass Configutations via Flags (checkout usage `mysql-toolkit --help`)
+- Pass Configurations via Flags (checkout usage `mysql-toolkit --help`)
 
 ## Development
 
