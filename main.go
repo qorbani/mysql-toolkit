@@ -2,17 +2,14 @@ package main
 
 import (
 	"fmt"
-)
+	"os"
 
-var (
-	// Version will inject by Makefile
-	Version = "0.0.0"
-	// Build will inject by Makefile
-	Build = "N/A"
-	// BuildTime will inject by Makefile
-	BuildTime = "Now"
+	"github.com/qorbani/mysql-toolkit/cmd"
 )
 
 func main() {
-	fmt.Printf("MySQL Toolkit v%s (%s)\nBuild Time: %s\n", Version, Build, BuildTime)
+	if err := cmd.Execute(); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
 }
