@@ -22,10 +22,12 @@ build: check
 	@echo "[-] Building..."
 	@echo "    - Version: ${VERSION_RELEASE}"
 	@echo "    - Generate: ${BINARY}"
-	@go build ${LDFLAGS} -o bin/${BINARY} ./main.go 
+	@go build ${LDFLAGS} -o bin/${BINARY} ./main.go
+	@echo "[+] Done" 
 
 .PHONY: release
 release: check $(PLATFORMS)
+	@echo "[+] Done" 
 
 .PHONY: $(PLATFORMS)
 $(PLATFORMS):
@@ -61,4 +63,10 @@ check-fmt:
 fmt:
 	@echo "[-] Formating gofmt..."
 	@gofmt -w $(SOURCES)
+	@echo "[+] Done"
+
+.PHONY: clean
+clean:
+	@echo "[-] Cleaning..."
+	@rm -Rf ./bin/$(BINARY){,-*}
 	@echo "[+] Done"

@@ -58,4 +58,7 @@ make build
 
 # Release for all platforms
 make release
+
+# Clean bin folder
+make clean
 ```
