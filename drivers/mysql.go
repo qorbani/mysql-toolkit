@@ -92,3 +92,11 @@ func (sql *MySQL) Query(query string) (string, error) {
 	}
 	return string(dataJSON), nil
 }
+
+// // Load use LOAD DATA command to load file to specified table.
+// func (sql *MySQL) Load(filePath string) error {
+// 	mysql.RegisterLocalFile(filePath)
+//	// https://dev.mysql.com/doc/refman/8.0/en/load-data.html
+// 	err := sql.Exec("LOAD DATA LOCAL INFILE '" + filePath + "' INTO TABLE foo")
+// 	return err
+// }
