@@ -8,10 +8,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var sql *drivers.MySQL
-
-var err error
-
 var queryCmd = &cobra.Command{
 	Use:   "query [sql statement]",
 	Short: "Execute SQL Query",
